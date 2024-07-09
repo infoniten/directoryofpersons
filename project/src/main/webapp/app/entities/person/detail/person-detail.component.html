@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (person()) {
+      <div>
+        <h2 data-cy="personDetailsHeading"><span>Лицо</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ person()!.id }}</span>
+          </dd>
+          <dt><span>Фамилия и имя</span></dt>
+          <dd>
+            <span>{{ person()!.nameAndFirstName }}</span>
+          </dd>
+          <dt><span>Последнее событие</span></dt>
+          <dd>
+            <span>{{ person()!.lastEvent }}</span>
+          </dd>
+          <dt><span>Последнее участие</span></dt>
+          <dd>
+            <span>{{ person()!.lastEventDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Телефон</span></dt>
+          <dd>
+            <span>{{ person()!.phoneNumber }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ person()!.email }}</span>
+          </dd>
+          <dt><span>Количество событий</span></dt>
+          <dd>
+            <span>{{ person()!.eventCount }}</span>
+          </dd>
+          <dt><span>Количество билетов</span></dt>
+          <dd>
+            <span>{{ person()!.ticketCount }}</span>
+          </dd>
+          <dt><span>Первое участие</span></dt>
+          <dd>
+            <span>{{ person()!.firstEventDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Продано на сумму, руб.</span></dt>
+          <dd>
+            <span>{{ person()!.soldForTheAmount }}</span>
+          </dd>
+          <dt><span>Все события</span></dt>
+          <dd>
+            <span>{{ person()!.allEvents }}</span>
+          </dd>
+          <dt><span>Рассылки</span></dt>
+          <dd>
+            <span>{{ person()!.mailings }}</span>
+          </dd>
+          <dt><span>Регион проживания</span></dt>
+          <dd>
+            <span>{{ person()!.regionResidence }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Назад</span>
+        </button>
+
+        <button type="button" [routerLink]="['/person', person()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Изменить</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

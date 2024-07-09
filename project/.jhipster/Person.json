@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20240709145748"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nameAndFirstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastEvent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastEventDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ticketCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "firstEventDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "soldForTheAmount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "allEvents",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mailings",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regionResidence",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Person",
+  "relationships": [],
+  "searchEngine": "no"
+}

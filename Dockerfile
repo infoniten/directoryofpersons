@@ -8,6 +8,6 @@ RUN apt-get -y install openjdk-21-jdk
 RUN java --version
 RUN apt-get -y install git
 RUN git --version
-COPY DirectoryOfPersons/ /usr/src/jhipster
+COPY project/ /usr/src/jhipster
 WORKDIR /usr/src/jhipster
 CMD ["./mvnw"]
