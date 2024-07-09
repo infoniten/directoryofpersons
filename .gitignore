@@ -1,2 +1,5 @@
+/db-data/pgdata/
+/maven-data/repository/
+/maven-data/wrapper/
 /target/
 /node_modules/

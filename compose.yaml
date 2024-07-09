@@ -11,6 +11,12 @@ services:
       - jhipster-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  web:
+    build: .
+    volumes:
+      - maven-data:/root/.m2
+    ports:
+      - "8080:8080"
 
 volumes:
   jhipster-data:
@@ -19,3 +25,9 @@ volumes:
       type: 'none'
       o: 'bind'
       device: 'db-data'
+  maven-data:
+      driver: local
+      driver_opts:
+          type: 'none'
+          o: 'bind'
+          device: 'maven-data'
