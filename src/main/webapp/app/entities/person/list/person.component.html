@@ -1,0 +1,174 @@
+<div>
+  <h2 id="page-heading" data-cy="PersonHeading">
+    <span>Список лиц</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Обновить список</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-person"
+        [routerLink]="['/person/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Создать новую запись</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (people?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Записей не найдено</span>
+    </div>
+  }
+
+  @if (people && people.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nameAndFirstName">
+              <div class="d-flex">
+                <span>Фамилия и имя</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastEvent">
+              <div class="d-flex">
+                <span>Последнее событие</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastEventDate">
+              <div class="d-flex">
+                <span>Последнее участие</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span>Телефон</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span>Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eventCount">
+              <div class="d-flex">
+                <span>Количество событий</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ticketCount">
+              <div class="d-flex">
+                <span>Количество билетов</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstEventDate">
+              <div class="d-flex">
+                <span>Первое участие</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soldForTheAmount">
+              <div class="d-flex">
+                <span>Продано на сумму, руб.</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="allEvents">
+              <div class="d-flex">
+                <span>Все события</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mailings">
+              <div class="d-flex">
+                <span>Рассылки</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="regionResidence">
+              <div class="d-flex">
+                <span>Регион проживания</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (person of people; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/person', person.id, 'view']">{{ person.id }}</a>
+              </td>
+              <td>{{ person.nameAndFirstName }}</td>
+              <td>{{ person.lastEvent }}</td>
+              <td>{{ person.lastEventDate | formatMediumDate }}</td>
+              <td>{{ person.phoneNumber }}</td>
+              <td>{{ person.email }}</td>
+              <td>{{ person.eventCount }}</td>
+              <td>{{ person.ticketCount }}</td>
+              <td>{{ person.firstEventDate | formatMediumDate }}</td>
+              <td>{{ person.soldForTheAmount }}</td>
+              <td>{{ person.allEvents }}</td>
+              <td>{{ person.mailings }}</td>
+              <td>{{ person.regionResidence }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/person', person.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Просмотр</span>
+                  </a>
+
+                  <a [routerLink]="['/person', person.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Изменить</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(person)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Удалить</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
